@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenCvSharp">
+      <HintPath>D:\성운\2021년도 1학기 경북대\멀티미디어 시스템\OpenCvSharp-4.5.1-20210210\ManagedLib\net461\OpenCvSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions">
+      <HintPath>D:\성운\2021년도 1학기 경북대\멀티미디어 시스템\OpenCvSharp-4.5.1-20210210\ManagedLib\net461\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.WpfExtensions">
+      <HintPath>D:\성운\2021년도 1학기 경북대\멀티미디어 시스템\OpenCvSharp-4.5.1-20210210\ManagedLib\net461\OpenCvSharp.WpfExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
