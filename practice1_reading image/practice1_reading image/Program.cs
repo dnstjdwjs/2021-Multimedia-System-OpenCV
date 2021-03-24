@@ -15,7 +15,7 @@ namespace Multimedia_System_OpenCV_Practice1
     {
         static void Main(string[] args)
         {
-            string root_path = "D:\\성운\\2021년도 1학기 경북대\\멀티미디어 시스템\\OpenCV실습 1_ 기본 사진\\축소본\\";
+            string root_path = "D:\\성운\\2021년도 1학기 경북대\\멀티미디어 시스템\\HW #1 제출물\\OpenCV실습용 체스판사진 10장\\";
             string image_path;
 
             int LENGTH = 10;
