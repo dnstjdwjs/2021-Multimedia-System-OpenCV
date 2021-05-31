@@ -9,5 +9,6 @@
 1. OpenCV 기본 사용법 익히기 ImRead(), ImShow()
 2. Camera Calibration with Chessboard Image
 3. Error diffusion dithering
-4. edge detection by laplacian filtering
-5. lane detection with Hough Transform
+4. 경계선 검출 - edge detection by laplacian filtering
+5. 차선 및 소실점 검출 - lane detection with Hough Transform
+5-1. (동영상 녹화출력) - practice Cv2.VideoWriter
