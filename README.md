@@ -7,6 +7,7 @@
 -작업환경: Windows 10 64bit, Visual Studio 2019, OpenCVSharp dll
 
 1. OpenCV 기본 사용법 익히기 ImRead(), ImShow()
-2. Camera Calibration by Chessboard Image
+2. Camera Calibration with Chessboard Image
 3. Error diffusion dithering
-4. 
+4. edge detection by laplacian filtering
+5. lane detection with Hough Transform
