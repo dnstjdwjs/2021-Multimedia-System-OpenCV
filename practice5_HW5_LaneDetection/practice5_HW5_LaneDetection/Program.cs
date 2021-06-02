@@ -7,7 +7,7 @@
  */
 
 /* - 과제수행간 메모 * 
- * 1.경로, 임계값 등 핵심요소가 아닌것들은 하드코딩 무방.
+ * 1.파일 입출력경로, 임계값 등 핵심요소가 아닌것들은 하드코딩 무방.
  * 2.핵심 알고리즘 실행영역을 강조위해 간결한 코드작성 혹은 적절한 주석 첨삭.
  */
 
@@ -89,7 +89,7 @@ namespace practice5_HW5_LaneDetection
 
                 //Cv2.WaitKey(0);
 
-                // ----------------------------------------------------- 직선 계산( 출력: 원점에서 내린 수선의 극좌표)
+                // ----------------------------------------------------- 직선 검출
                 LineSegmentPolar[] lineL;
                 LineSegmentPolar[] lineR;
 
@@ -116,12 +116,11 @@ namespace practice5_HW5_LaneDetection
                     else
                         houghthresh--;
                 }
-
-                lineR = Cv2.HoughLines(EdgesR, 0.2, Cv2.PI / 180, houghthresh);
+                Console.WriteLine("검출된 갯수: {0},{1}", lineL.Length, lineR.Length);
                 // 인자:  (출력, rho 해상도, theta 해상도( PI/180 rad = 1 degree), 임계값(vote의 최소치))
 
-                int x1 = Convert.ToInt32(lineL[0].XPosOfLine(599)); // 좌측차선 화면 하단 경계 절편
-                int x2 = Convert.ToInt32(lineR[0].XPosOfLine(599)); // 우측차선 화면 하단 경계 절편
+                int x1 = Convert.ToInt32(lineL[0].XPosOfLine(599)); // 좌측차선 화면 하단 절편
+                int x2 = Convert.ToInt32(lineR[0].XPosOfLine(599)); // 우측차선 화면 하단 절편
 
                 int ptL1 = Convert.ToInt32(lineL[0].YPosOfLine(x1));
                 int ptL2 = Convert.ToInt32(lineL[0].YPosOfLine(x2));
@@ -134,32 +133,35 @@ namespace practice5_HW5_LaneDetection
                 // lineR 직선의 방정식
                 float lineR1 = (float)(ptR2 - ptR1) / (float)(x2 - x1);
                 float lineR2 = ptR2 - lineR1 * x2;
-                // 교점(소실점?) 구하기
+                // 교점(소실점?) 계산
                 Point ptBanish = new Point();
                 ptBanish.X = (int)((lineR2 - lineL2) / (lineL1 - lineR1));
                 ptBanish.Y = (int)(lineL1 * ptBanish.X + lineL2);
 
                 // Console.WriteLine("교점: {0}", ptBanish.ToString());
 
-                for (int k = 0; k < 1; k++)
+                int lineCount = 1;
+                for (int k = 0; k < lineCount; k++)
                 {
                     // Console.WriteLine(lineL[k].ToString());
                     int y1 = Convert.ToInt32(lineL[k].YPosOfLine(x1));
                     int y2 = Convert.ToInt32(lineL[k].YPosOfLine(ptBanish.X));
 
+                    // 좌측차선 그리기 : 좌하단 절편부터 소실점까지
                     Cv2.Line(imgOut, x1, y1, ptBanish.X, y2, Scalar.Red, 2, default, 0);
                 }
 
-                for (int k = 0; k < 1; k++)
+                for (int k = 0; k < lineCount; k++)
                 {
                     // Console.WriteLine(lineR[k].ToString());
                     int y1 = Convert.ToInt32(lineR[k].YPosOfLine(ptBanish.X));
                     int y2 = Convert.ToInt32(lineR[k].YPosOfLine(x2));
 
+                    // 우측차선 그리기 : 소실점부터 우하단 절편까지
                     Cv2.Line(imgOut, ptBanish.X, y1, x2, y2, Scalar.Red, 2, default, 0);
                 }
 
-                // 소실점 표시
+                // 소실점 그리기
                 Cv2.Circle(imgOut, ptBanish, 8, Scalar.LightYellow, 2);
 
                 // Cv2.ImShow("img", imgOut);
